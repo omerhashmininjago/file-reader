@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <import resource="fileparser-config.xml"/>
+
+    <util:list id="domain_one_class_attributes" list-class="java.util.ArrayList">
+        <value>valueDate</value>
+        <value>transactionDate</value>
+        <value>chequeNumber</value>
+        <value>transRemarks</value>
+        <value>withdrawlAmt</value>
+        <value>depositAmt</value>
+        <value>balance</value>
+    </util:list>
+    
+    <util:map id="domain_one_cellProcessors" map-class="java.util.LinkedHashMap">
+        <entry key="valueDate" value-ref="date"/>
+        <entry key="transactionDate" value-ref="date"/>
+        <entry key="chequeNumber" value-ref="optional"/>
+        <entry key="transRemarks" value-ref="optional"/>
+        <entry key="withdrawlAmt" value-ref="bigDecimal"/>
+        <entry key="depositAmt" value-ref="bigDecimal"/>
+        <entry key="balance" value-ref="bigDecimal"/>
+    </util:map>
+
+</beans>

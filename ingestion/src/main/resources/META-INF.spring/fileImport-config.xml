@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <import resource="domain-config.xml"/>
+
+    <bean id="fileReader" class="com.file.parser.service.impl.FileReaderImpl">
+       <property name="fileParsers" ref="fileParsers"/>
+    </bean>
+
+    <util:map id="fileParsers" map-class="java.util.HashMap">
+        <entry key="csv" value-ref="genericFileParser"/>
+    </util:map>
+
+    <bean id="genericFileParser" class="com.file.parser.service.impl.GenericFileParser"/>
+
+    <!-- ============= File Parser Configurations ===========-->
+
+    <util:map id="domains" map-class="java.util.HashMap">
+        <entry key="domain_one" value="com.banking.omer.domain.RawICICIBank"/>
+    </util:map>
+
+    <util:map id="domainFields" map-class="java.util.LinkedHashMap">
+        <entry key="domain_one_class_attributes" value-ref="domain_one_class_attributes"/>
+    </util:map>
+
+    <util:map id="cellProcessors" map-class="java.util.LinkedHashMap">
+        <entry key="domain_one_cellProcessors" value-ref="domain_one_cellProcessors"/>
+    </util:map>
+
+    <bean id="configService" class="com.file.ingestion.config.ConfigServiceImpl">
+        <property name="domains" ref="domains"/>
+        <property name="domainFields" ref="domainFields"/>
+        <property name="cellProcessors" ref="cellProcessors"/>
+    </bean>
+</beans>
