@@ -8,6 +8,7 @@
     <modules>
         <module>ingestion</module>
         <module>fileparser</module>
+        <module>persistence</module>
     </modules>
     <packaging>pom</packaging>
 

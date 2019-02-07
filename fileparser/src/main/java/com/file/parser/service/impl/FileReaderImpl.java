@@ -14,23 +14,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileReaderImpl implements FileReader {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FileReaderImpl.class);
     private Map<String, FileParser> fileParsers;
 
-    public ImportResponse read(File file, String sourceSystem, String stmtType) {
-
-        ImportResponse response = null;
+    public ImportResponse read(File file, String sourceSystem, String stmtType) throws Exception {
 
         String fileName = file.getName();
         FileParser fileParser = fileParsers.get(getFileExtn(fileName));
 
-        try {
-            java.io.FileReader fileReader = new java.io.FileReader(file);
-            response = fileParser.read(fileReader, sourceSystem, stmtType);
-        } catch (FileNotFoundException e) {
-            LOG.error("Exception occured", e);
-        }
-        return response;
+        java.io.FileReader fileReader = new java.io.FileReader(file);
+        return fileParser.read(fileReader, sourceSystem, stmtType);
     }
 
     private String getFileExtn(String fileName) {

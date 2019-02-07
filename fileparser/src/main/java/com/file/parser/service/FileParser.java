@@ -6,5 +6,5 @@ import java.io.FileReader;
 
 public interface FileParser {
 
-    ImportResponse read(FileReader fileReader, String systemName, String statementType);
+    ImportResponse read(FileReader fileReader, String systemName, String statementType) throws Exception;
 }

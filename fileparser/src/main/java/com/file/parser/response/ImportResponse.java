@@ -3,7 +3,7 @@ package com.file.parser.response;
 
 import java.util.List;
 
-public class ImportResponse {
+public final class ImportResponse {
 
     private List domainObjectList;
 

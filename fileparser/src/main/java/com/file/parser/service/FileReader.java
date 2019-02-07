@@ -6,5 +6,5 @@ import java.io.File;
 
 public interface FileReader {
 
-    ImportResponse read(File file, String sourceSystem, String stmtType);
+    ImportResponse read(File file, String sourceSystem, String stmtType) throws Exception;
 }
