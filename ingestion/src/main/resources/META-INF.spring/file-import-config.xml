@@ -7,7 +7,10 @@
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
-    <import resource="domain-config.xml"/>
+    <import resource="fileparser-config.xml"/>
+    <import resource="balance-config.xml"/>
+    <import resource="cashflow-config.xml"/>
+
 
     <bean id="fileReader" class="com.file.parser.service.impl.FileReaderImpl">
        <property name="fileParsers" ref="fileParsers"/>
@@ -22,15 +25,18 @@
     <!-- ============= File Parser Configurations ===========-->
 
     <util:map id="domains" map-class="java.util.HashMap">
-        <entry key="domain_one" value="com.banking.omer.domain.RawICICIBank"/>
+        <entry key="balance" value="com.file.persistence.domain.Balance"/>
+        <entry key="cashflow" value="com.file.persistence.domain.Cashflow"/>
     </util:map>
 
     <util:map id="domainFields" map-class="java.util.LinkedHashMap">
-        <entry key="domain_one_class_attributes" value-ref="domain_one_class_attributes"/>
+        <entry key="balance_class_attributes" value-ref="balance_class_attributes"/>
+        <entry key="cashflow_class_attributes" value-ref="cashflow_class_attributes"/>
     </util:map>
 
     <util:map id="cellProcessors" map-class="java.util.LinkedHashMap">
-        <entry key="domain_one_cellProcessors" value-ref="domain_one_cellProcessors"/>
+        <entry key="balance_cellProcessors" value-ref="balance_cellProcessors"/>
+        <entry key="cashflow_cellProcessors" value-ref="cashflow_cellProcessors"/>
     </util:map>
 
     <bean id="configService" class="com.file.ingestion.config.ConfigServiceImpl">
