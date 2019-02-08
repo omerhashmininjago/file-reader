@@ -2,6 +2,7 @@ package com.file.parser.service.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Map;
 
 import com.file.parser.response.ImportResponse;
@@ -16,13 +17,13 @@ public class FileReaderImpl implements FileReader {
 
     private Map<String, FileParser> fileParsers;
 
-    public ImportResponse read(File file, String sourceSystem, String stmtType) throws Exception {
+    public ImportResponse read(File file, String transactionType) throws ClassNotFoundException, IOException {
 
         String fileName = file.getName();
         FileParser fileParser = fileParsers.get(getFileExtn(fileName));
 
         java.io.FileReader fileReader = new java.io.FileReader(file);
-        return fileParser.read(fileReader, sourceSystem, stmtType);
+        return fileParser.read(fileReader, transactionType);
     }
 
     private String getFileExtn(String fileName) {

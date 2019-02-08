@@ -2,6 +2,7 @@ package com.file.ingestion.config;
 
 
 import com.file.parser.config.ConfigService;
+import org.springframework.stereotype.Service;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 
 import java.util.List;

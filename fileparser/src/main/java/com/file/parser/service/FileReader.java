@@ -3,8 +3,9 @@ package com.file.parser.service;
 import com.file.parser.response.ImportResponse;
 
 import java.io.File;
+import java.io.IOException;
 
 public interface FileReader {
 
-    ImportResponse read(File file, String sourceSystem, String stmtType) throws Exception;
+    ImportResponse read(File file, String transactionType) throws ClassNotFoundException, IOException;
 }

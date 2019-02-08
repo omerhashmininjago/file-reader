@@ -30,35 +30,30 @@ public class GenericFileParser implements FileParser {
         this.configService = configService;
     }
 
-    public ImportResponse read(FileReader fileReader, final String systemName, final String statementType) throws Exception {
+    public ImportResponse read(FileReader fileReader, final String transactionType) throws ClassNotFoundException, IOException {
 
-        Class targetClass = getTargetClass(systemName, statementType);
-        CellProcessor[] cellProcessors = getCellProcessors(systemName, statementType);
-        String[] fieldsInTargetClass = getFieldsInTargetClass(systemName, statementType);
+        Class targetClass = getTargetClass(transactionType);
+        CellProcessor[] cellProcessors = getCellProcessors(transactionType);
+        String[] fieldsInTargetClass = getFieldsInTargetClass(transactionType);
 
         ICsvBeanReader beanReader = new CsvBeanReader(fileReader, getPreference());
 
         ImportResponse response = new ImportResponse();
-        try {
-            beanReader.getHeader(true);
+        beanReader.getHeader(true);
 
-            Object domainObj;
-            List<Object> domainObjectList = new ArrayList<Object>();
+        Object domainObj;
+        List<Object> domainObjectList = new ArrayList<Object>();
 
-            do {
-                domainObj = beanReader.read(targetClass, fieldsInTargetClass, cellProcessors);
+        do {
+            domainObj = beanReader.read(targetClass, fieldsInTargetClass, cellProcessors);
 
-                if (domainObj != null) {
-                    domainObjectList.add(domainObj);
-                }
+            if (domainObj != null) {
+                domainObjectList.add(domainObj);
+            }
 
-            } while (domainObj != null);
+        } while (domainObj != null);
 
-            response.setDomainObjectList(domainObjectList);
-        } catch (IOException e) {
-            throw new Exception("Exception occurred reading the file for the system " +  systemName + " and statement " + statementType);
-        }
-
+        response.setDomainObjectList(domainObjectList);
         return response;
     }
 
@@ -66,31 +61,24 @@ public class GenericFileParser implements FileParser {
         return CsvPreference.STANDARD_PREFERENCE;
     }
 
-    private Class getTargetClass(final String systemName, final String statementType) throws Exception {
+    private Class getTargetClass(final String transactionType) throws ClassNotFoundException {
 
-        Class clazz;
-        String domainClass = configService.getDomains().get(systemName + "_" + statementType + "_domain");
-
-        try {
-            clazz = Class.forName(domainClass);
-        } catch (ClassNotFoundException e) {
-            throw new Exception("Exception occurred while fetching the filter class for the system " +  systemName + " and statement " + statementType);
-        }
-        return clazz;
+        String domainClass = configService.getDomains().get(transactionType + "_domain");
+        return Class.forName(domainClass);
     }
 
-    private CellProcessor[] getCellProcessors(final String systemName, final String statementType) {
+    private CellProcessor[] getCellProcessors(final String transactionType) {
 
         Map<String, CellProcessor> cellProcessors = configService.getCellProcessors()
-                .get(systemName + "_" + statementType + "_cellProcessors");
+                .get(transactionType + "_cellProcessors");
 
         Collection<CellProcessor> cellProcessorList = cellProcessors.values();
 
         return cellProcessorList.toArray(new CellProcessorAdaptor[]{});
     }
 
-    private String[] getFieldsInTargetClass(final String systemName, final String statementType) {
-        List<String> fields = configService.getDomainFields().get(systemName + "_" + statementType + "_class_attributes");
+    private String[] getFieldsInTargetClass(final String transactionType) {
+        List<String> fields = configService.getDomainFields().get(transactionType + "_class_attributes");
         return fields.toArray(new String[]{});
     }
 }

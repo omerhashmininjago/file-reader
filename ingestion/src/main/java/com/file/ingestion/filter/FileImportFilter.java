@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 public class FileImportFilter {
 
-    private FileFilter fileFilter;
     private MultipartFile multipartFile;
+    private String transactionType;
 
 }

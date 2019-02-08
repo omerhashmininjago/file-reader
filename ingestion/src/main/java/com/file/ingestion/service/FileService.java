@@ -1,11 +1,10 @@
 package com.file.ingestion.service;
 
-import com.file.ingestion.filter.FileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.FilterInputStream;
+import java.io.IOException;
 
 @Service
 public class FileService {
@@ -20,12 +19,12 @@ public class FileService {
         this.fileImportService = fileImportService;
     }
 
-    public void loadFile(String systemName, String statementType) throws Exception {
-        File file = fileLoadService.loadFile();
-        importFile(file, systemName, statementType);
+    public void loadFile(String transactionType) throws ClassNotFoundException, IOException {
+        File file = fileLoadService.loadFile(transactionType);
+        importFile(file, transactionType);
     }
 
-    public void importFile(File file, String systemName, String statementType) throws Exception {
-        fileImportService.importFile(file, systemName, statementType);
+    public void importFile(File file, String transactionType) throws ClassNotFoundException, IOException {
+        fileImportService.importFile(file, transactionType);
     }
 }

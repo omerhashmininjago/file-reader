@@ -1,12 +1,11 @@
 package com.file.ingestion.service;
 
-import com.file.ingestion.config.ConfigServiceImpl;
-import com.file.parser.config.ConfigService;
 import com.file.parser.service.FileReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
 
 @Service
 public class FileImportService {
@@ -18,8 +17,8 @@ public class FileImportService {
         this.fileReader = fileReader;
     }
 
-    public void importFile(File file, String systemName, String statementType) throws Exception {
+    public void importFile(File file, String systemName) throws ClassNotFoundException, IOException {
 
-        fileReader.read(file, systemName, statementType);
+        fileReader.read(file, systemName);
     }
 }
