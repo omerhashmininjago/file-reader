@@ -12,12 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Component
-public class FileReaderImpl implements FileReader {
+public class FileReaderImpl<T> implements FileReader<T> {
 
     private Map<String, FileParser> fileParsers;
 
-    public ImportResponse read(File file, String transactionType) throws ClassNotFoundException, IOException {
+    public ImportResponse<T> read(File file, String transactionType) throws ClassNotFoundException, IOException {
 
         String fileName = file.getName();
         FileParser fileParser = fileParsers.get(getFileExtn(fileName));

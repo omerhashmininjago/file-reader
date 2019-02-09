@@ -5,7 +5,7 @@ import com.file.parser.response.ImportResponse;
 import java.io.FileReader;
 import java.io.IOException;
 
-public interface FileParser {
+public interface FileParser<T> {
 
-    ImportResponse read(FileReader fileReader, String transactionType) throws ClassNotFoundException, IOException;
+    ImportResponse<T> read(FileReader fileReader, String transactionType) throws ClassNotFoundException, IOException;
 }

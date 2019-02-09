@@ -3,19 +3,19 @@ package com.file.parser.response;
 
 import java.util.List;
 
-public final class ImportResponse {
+public final class ImportResponse<T> {
 
-    private List domainObjectList;
+    private List<T> domainObjectList;
 
-    public ImportResponse(){
+    public ImportResponse() {
 
     }
 
-    public List getDomainObjectList() {
+    public List<T> getDomainObjectList() {
         return domainObjectList;
     }
 
-    public void setDomainObjectList(List domainObjectList) {
+    public void setDomainObjectList(List<T> domainObjectList) {
         this.domainObjectList = domainObjectList;
     }
 }

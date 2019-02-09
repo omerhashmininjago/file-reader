@@ -8,6 +8,8 @@ import java.util.Map;
 public interface ConfigService {
 
     Map<String, Map<String, CellProcessor>> getCellProcessors();
+
     Map<String, List<String>> getDomainFields();
+
     Map<String, String> getDomains();
 }

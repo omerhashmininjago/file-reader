@@ -7,6 +7,23 @@
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
+
+    <import resource="classpath:*META-INF/spring/fileparser-config.xml"/>
+
+    <util:list id="balance_class_attributes" list-class="java.util.ArrayList">
+        <value>valueDate</value>
+        <value>chequeNumber</value>
+        <value>transRemarks</value>
+        <value>balance</value>
+    </util:list>
+    
+    <util:map id="balance_cellProcessors" map-class="java.util.LinkedHashMap">
+        <entry key="valueDate" value-ref="date"/>
+        <entry key="chequeNumber" value-ref="optional"/>
+        <entry key="transRemarks" value-ref="optional"/>
+        <entry key="balance" value-ref="bigDecimal"/>
+    </util:map>
+
     <util:list id="cashflow_class_attributes" list-class="java.util.ArrayList">
         <value>transactionDate</value>
         <value>depositAmt</value>

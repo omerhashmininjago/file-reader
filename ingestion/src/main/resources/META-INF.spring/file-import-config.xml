@@ -7,19 +7,19 @@
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
-    <import resource="classpath:*META-INF/spring/fileparser-config.xml"/>
-    <import resource="balance-config.xml"/>
-    <import resource="cashflow-config.xml"/>
-
-    <bean id="fileReader" class="com.file.parser.service.impl.FileReaderImpl">
-       <property name="fileParsers" ref="fileParsers"/>
-    </bean>
+    <import resource="transaction-config.xml"/>
 
     <util:map id="fileParsers" map-class="java.util.HashMap">
         <entry key="csv" value-ref="genericFileParser"/>
     </util:map>
 
-    <bean id="genericFileParser" class="com.file.parser.service.impl.GenericFileParser"/>
+    <bean id="fileReader" class="com.file.parser.service.impl.FileReaderImpl">
+        <property name="fileParsers" ref="fileParsers"/>
+    </bean>
+
+    <bean id="genericFileParser" class="com.file.parser.service.impl.GenericFileParser">
+        <constructor-arg name="configService" ref="configService"/>
+    </bean>
 
     <!-- ============= File Parser Configurations ===========-->
 

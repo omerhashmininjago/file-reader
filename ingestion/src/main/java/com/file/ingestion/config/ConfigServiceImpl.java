@@ -13,7 +13,8 @@ public class ConfigServiceImpl implements ConfigService {
     private Map<String, String> domains;
     private Map<String, List<String>> domainFields;
 
-    public ConfigServiceImpl(){}
+    public ConfigServiceImpl() {
+    }
 
     public void setCellProcessors(Map<String, Map<String, CellProcessor>> columnValidators) {
         this.cellProcessors = columnValidators;

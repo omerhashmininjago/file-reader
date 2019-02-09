@@ -20,7 +20,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class GenericFileParser implements FileParser {
+import static org.supercsv.prefs.CsvPreference.STANDARD_PREFERENCE;
+
+public class GenericFileParser<T> implements FileParser<T> {
 
     private final ConfigService configService;
 
@@ -29,22 +31,22 @@ public class GenericFileParser implements FileParser {
         this.configService = configService;
     }
 
-    public ImportResponse read(FileReader fileReader, final String transactionType) throws ClassNotFoundException, IOException {
+    public ImportResponse<T> read(FileReader fileReader, final String transactionType) throws ClassNotFoundException, IOException {
 
-        Class targetClass = getTargetClass(transactionType);
+        T targetClass = (T) getTargetClass(transactionType);
         CellProcessor[] cellProcessors = getCellProcessors(transactionType);
         String[] fieldsInTargetClass = getFieldsInTargetClass(transactionType);
 
         ICsvBeanReader beanReader = new CsvBeanReader(fileReader, getPreference());
 
-        ImportResponse response = new ImportResponse();
+        ImportResponse<T> response = new ImportResponse();
         beanReader.getHeader(true);
 
-        Object domainObj;
-        List<Object> domainObjectList = new ArrayList<Object>();
+        T domainObj;
+        List<T> domainObjectList = new ArrayList<T>();
 
         do {
-            domainObj = beanReader.read(targetClass, fieldsInTargetClass, cellProcessors);
+            domainObj = (T) beanReader.read(targetClass, fieldsInTargetClass, cellProcessors);
 
             if (domainObj != null) {
                 domainObjectList.add(domainObj);
@@ -56,14 +58,14 @@ public class GenericFileParser implements FileParser {
         return response;
     }
 
-    public CsvPreference getPreference() {
-        return CsvPreference.STANDARD_PREFERENCE;
+    private CsvPreference getPreference() {
+        return STANDARD_PREFERENCE;
     }
 
-    private Class getTargetClass(final String transactionType) throws ClassNotFoundException {
+    private Class<T> getTargetClass(final String transactionType) throws ClassNotFoundException {
 
         String domainClass = configService.getDomains().get(transactionType + "_domain");
-        return Class.forName(domainClass);
+        return (Class<T>) Class.forName(domainClass);
     }
 
     private CellProcessor[] getCellProcessors(final String transactionType) {

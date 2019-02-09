@@ -12,12 +12,12 @@ import java.io.IOException;
 public class FileControllerErrorAdvice {
 
     @ExceptionHandler(value = {ClassNotFoundException.class, IOException.class})
-    public ResponseEntity exceptionHandler(Exception exception){
+    public ResponseEntity exceptionHandler(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.EXPECTATION_FAILED);
     }
 
     @ExceptionHandler(value = TransactionTypeInvalidException.class)
-    public ResponseEntity exceptionHandler(TransactionTypeInvalidException exception){
+    public ResponseEntity exceptionHandler(TransactionTypeInvalidException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

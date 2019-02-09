@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 @ImportResource(value = {"classpath:*META-INF.spring/file-import-config.xml"})
-@SpringBootApplication(scanBasePackages = {"com.file.ingestion", "com.file.persistence" , "com.file.parser"})
+@SpringBootApplication(scanBasePackages = {"com.file.ingestion", "com.file.persistence", "com.file.parser"})
 public class ProcessorAppInitializer {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProcessorAppInitializer.class);

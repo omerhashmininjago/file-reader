@@ -23,6 +23,7 @@
         <java.version>1.8</java.version>
         <lombok.version>1.18.4</lombok.version>
         <h2.version>1.4.197</h2.version>
+        <supercsv.version>2.3.1</supercsv.version>
         <maven.compiler.version>3.8.0</maven.compiler.version>
         <javax.servlet.version>3.0.1</javax.servlet.version>
         <spring.version>5.1.4.RELEASE</spring.version>
@@ -62,6 +63,16 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${javax.servlet.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.supercsv</groupId>
+                <artifactId>super-csv-dozer</artifactId>
+                <version>${supercsv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.supercsv</groupId>
+                <artifactId>super-csv-joda</artifactId>
+                <version>${supercsv.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

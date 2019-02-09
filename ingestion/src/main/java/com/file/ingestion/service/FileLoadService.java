@@ -1,11 +1,10 @@
 package com.file.ingestion.service;
 
-import static com.file.ingestion.factory.FileName.valueOf;
-
-import org.apache.commons.lang3.EnumUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+
+import static com.file.ingestion.factory.TransactionType.valueOf;
 
 @Service
 public class FileLoadService {
