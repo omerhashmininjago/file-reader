@@ -7,16 +7,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
-@ImportResource(value = {"domain-config.xml", "file-import-config"})
+@ImportResource(value = {"classpath:*META-INF.spring/file-import-config.xml"})
 @SpringBootApplication(scanBasePackages = {"com.file.ingestion", "com.file.persistence" , "com.file.parser"})
 public class ProcessorAppInitializer {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProcessorAppInitializer.class);
 
+    static {
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
+    }
+
     public static void main(String[] args) {
 
         LOG.info("Starting app now...");
-        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
         SpringApplication.run(ProcessorAppInitializer.class, args);
         LOG.info("App has successfully started");
     }

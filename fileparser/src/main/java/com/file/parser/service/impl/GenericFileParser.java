@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-@Component
 public class GenericFileParser implements FileParser {
 
     private final ConfigService configService;

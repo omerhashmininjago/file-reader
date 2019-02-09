@@ -4,8 +4,6 @@ import com.file.ingestion.error.exception.TransactionTypeInvalidException;
 import com.file.ingestion.factory.FileName;
 import com.file.ingestion.filter.FileImportFilter;
 import com.file.ingestion.service.FileService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
-
+import java.io.File;
 import java.io.IOException;
 
 import static org.apache.commons.lang3.EnumUtils.isValidEnum;
@@ -29,10 +27,12 @@ public class FileController {
     }
 
     @PostMapping(value = "/importFile/")
-    public void importFile(@NotNull @RequestBody FileImportFilter fileImportFilter) {
+    public void importFile(@NotNull @RequestBody FileImportFilter fileImportFilter) throws IOException, ClassNotFoundException {
 
         validateTransactionType(fileImportFilter.getTransactionType());
-        fileService.importFile(fileImportFilter.getMultipartFile(), fileImportFilter.getTransactionType());
+        File importingFile = new File(fileImportFilter.getMultipartFile().getOriginalFilename());
+        fileImportFilter.getMultipartFile().transferTo(importingFile);
+        fileService.importFile(importingFile, fileImportFilter.getTransactionType());
     }
 
     @PostMapping(value = "/loadFile/")

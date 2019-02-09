@@ -7,10 +7,9 @@
             http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util-3.1.xsd">
 
-    <import resource="fileparser-config.xml"/>
+    <import resource="classpath:*META-INF/spring/fileparser-config.xml"/>
     <import resource="balance-config.xml"/>
     <import resource="cashflow-config.xml"/>
-
 
     <bean id="fileReader" class="com.file.parser.service.impl.FileReaderImpl">
        <property name="fileParsers" ref="fileParsers"/>
