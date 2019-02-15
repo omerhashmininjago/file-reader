@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity(name = "BALANCE")
 @Table
@@ -19,7 +19,7 @@ public class Balance {
     private String id;
 
     @Column(name = "VALUE_DATE")
-    private LocalDate valueDate;
+    private Date valueDate;
 
     @Column(name = "CHEQUE_NUMBER")
     private String chequeNumber;
@@ -30,7 +30,7 @@ public class Balance {
     @Column(name = "BALANCE")
     private BigDecimal balance;
 
-    public Balance(LocalDate valueDate, String chequeNumber, String transRemarks, BigDecimal balance) {
+    public Balance(Date valueDate, String chequeNumber, String transRemarks, BigDecimal balance) {
         this.valueDate = valueDate;
         this.chequeNumber = chequeNumber;
         this.transRemarks = transRemarks;

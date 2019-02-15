@@ -24,6 +24,8 @@
         <lombok.version>1.18.4</lombok.version>
         <h2.version>1.4.197</h2.version>
         <supercsv.version>2.3.1</supercsv.version>
+        <mockito.version>2.23.4</mockito.version>
+        <junit.version>4.12</junit.version>
         <maven.compiler.version>3.8.0</maven.compiler.version>
         <javax.servlet.version>3.0.1</javax.servlet.version>
         <spring.version>5.1.4.RELEASE</spring.version>
@@ -73,6 +75,21 @@
                 <groupId>net.sf.supercsv</groupId>
                 <artifactId>super-csv-joda</artifactId>
                 <version>${supercsv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring.boot.dependencies.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

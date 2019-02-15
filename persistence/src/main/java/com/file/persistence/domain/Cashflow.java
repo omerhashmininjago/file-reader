@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity(name = "CASHFLOW")
 @Table
@@ -19,7 +19,7 @@ public class Cashflow {
     private String id;
 
     @Column(name = "TRANSACTION_DATE")
-    private LocalDate transactionDate;
+    private Date transactionDate;
 
     @Column(name = "DEPOSIT_AMOUNT")
     private BigDecimal depositAmt;
@@ -27,7 +27,7 @@ public class Cashflow {
     @Column(name = "CASHFLOW")
     private BigDecimal cashflow;
 
-    public Cashflow(LocalDate transactionDate, BigDecimal depositAmt, BigDecimal cashflow) {
+    public Cashflow(Date transactionDate, BigDecimal depositAmt, BigDecimal cashflow) {
         this.transactionDate = transactionDate;
         this.depositAmt = depositAmt;
         this.cashflow = cashflow;
